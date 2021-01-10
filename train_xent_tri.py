@@ -67,7 +67,7 @@ def main():
 #     model = nn.DataParallel(model).cuda() if use_gpu else model
     
     print('Initializing model: ViT')
-    model = models.ViT(
+    model = ViT(
     image_size = 128,
     patch_size = 8,
     num_classes = dm.num_train_pids,
