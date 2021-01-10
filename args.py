@@ -7,7 +7,7 @@ def argument_parser():
     # ************************************************************
     # Datasets (general)
     # ************************************************************
-    parser.add_argument('--root', type=str, default='./datasets',
+    parser.add_argument('--root', type=str, default='/content/drive/MyDrive',
                         help='root path to data directory')
     parser.add_argument('-s', '--source-names', type=str, required=True, nargs='+',
                         help='source dataset for training(delimited by space)')
