@@ -77,8 +77,7 @@ def main():
     heads = 16,
     mlp_dim = 2048,
     channels = 3,
-    dropout = 0.1,
-    emb_dropout = 0.1
+    dropout = 0.1
     ).cuda()
 
     criterion_xent = CrossEntropyLoss(num_classes=dm.num_train_pids, use_gpu=use_gpu, label_smooth=args.label_smooth)
