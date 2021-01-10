@@ -56,15 +56,30 @@ def main():
     dm = ImageDataManager(use_gpu, **dataset_kwargs(args))
     trainloader, testloader_dict = dm.return_dataloaders()
 
-    print('Initializing model: {}'.format(args.arch))
-    model = models.init_model(name=args.arch, num_classes=dm.num_train_pids, loss={'xent', 'htri'},
-                              pretrained=not args.no_pretrained, use_gpu=use_gpu)
-    print('Model size: {:.3f} M'.format(count_num_param(model)))
+#     print('Initializing model: {}'.format(args.arch))
+#     model = models.init_model(name=args.arch, num_classes=dm.num_train_pids, loss={'xent', 'htri'},
+#                               pretrained=not args.no_pretrained, use_gpu=use_gpu)
+#     print('Model size: {:.3f} M'.format(count_num_param(model)))
 
-    if args.load_weights and check_isfile(args.load_weights):
-        load_pretrained_weights(model, args.load_weights)
+#     if args.load_weights and check_isfile(args.load_weights):
+#         load_pretrained_weights(model, args.load_weights)
 
-    model = nn.DataParallel(model).cuda() if use_gpu else model
+#     model = nn.DataParallel(model).cuda() if use_gpu else model
+    
+    print('Initializing model: ViT')
+    model = models.ViT(
+    image_size = 128,
+    patch_size = 8,
+    num_classes = dm.num_train_pids,
+    dim = 1024,
+    depth = 6,
+    heads = 16,
+    mlp_dim = 2048,
+    channels = 3,
+    dropout = 0.1,
+    emb_dropout = 0.1,
+    loss = 'xent'
+    ).cuda()
 
     criterion_xent = CrossEntropyLoss(num_classes=dm.num_train_pids, use_gpu=use_gpu, label_smooth=args.label_smooth)
     criterion_htri = TripletLoss(margin=args.margin)
