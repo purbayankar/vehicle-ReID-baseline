@@ -65,7 +65,7 @@ def main():
 #     if args.load_weights and check_isfile(args.load_weights):
 #         load_pretrained_weights(model, args.load_weights)
 
-    model = nn.DataParallel(model).cuda() if use_gpu else model
+#     model = nn.DataParallel(model).cuda() if use_gpu else model
     
     print('Initializing model: ViT')
     model = ViT(
@@ -80,7 +80,8 @@ def main():
     dropout = 0.1,
     emb_dropout = 0.1,
     loss = 'xent'
-    ).cuda()
+    )
+    model = nn.DataParallel(model).cuda() if use_gpu else model
 
     criterion_xent = CrossEntropyLoss(num_classes=dm.num_train_pids, use_gpu=use_gpu, label_smooth=args.label_smooth)
     criterion_htri = TripletLoss(margin=args.margin)
