@@ -16,6 +16,7 @@ import torch.backends.cudnn as cudnn
 from args import argument_parser, dataset_kwargs, optimizer_kwargs, lr_scheduler_kwargs
 from vehiclereid.data_manager import ImageDataManager
 from vehiclereid import models
+from vehiclereid.models import ViT
 from vehiclereid.losses import CrossEntropyLoss, TripletLoss, DeepSupervision
 from vehiclereid.utils.iotools import check_isfile
 from vehiclereid.utils.avgmeter import AverageMeter
