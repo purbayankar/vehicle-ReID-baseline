@@ -1,12 +1,14 @@
 from __future__ import absolute_import
 
 from .resnet import *
+from .visualTransformer import *
 
 
 __model_factory = {
     # image classification models
     'resnet50': resnet50,
     'resnet50_fc512': resnet50_fc512,
+    'ViT': vit,
 }
 
 
