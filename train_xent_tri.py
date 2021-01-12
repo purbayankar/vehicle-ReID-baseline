@@ -69,7 +69,7 @@ def main():
     	depth = 6,
     	heads = 16,
     	mlp_dim = 2048,
-    	loss={'xent', 'htri'},
+#     	loss={'xent', 'htri'},
     	pretrained = not args.no_pretrained
     	)
     
