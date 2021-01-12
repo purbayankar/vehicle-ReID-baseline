@@ -131,10 +131,19 @@ class ViT(nn.Module):
         x = self.transformer(x, mask)
 
         x = self.to_cls_token(x[:, 0])
-        if self.loss == 'htri':
+        
+        if self.loss == {'xent'}:
+            return self.mlp_head(x)
+        elif self.loss == {'xent', 'htri'}:
             return self.mlp_head(x), x
         else:
-            return self.mlp_head(x)
+            raise KeyError("Unsupported loss: {}".format(self.loss))
+        
+        
+#         if self.loss == 'htri':
+#             return self.mlp_head(x), x
+#         else:
+#             return self.mlp_head(x)
 
     # def forward(self, img0, img1, img2):
     #     output0 = self.forward_once(img0)
